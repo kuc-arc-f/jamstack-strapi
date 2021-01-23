@@ -23,7 +23,7 @@ const BlogId = ({blog}) => {
       </div>
       <hr />            
       <h1>{blog.name}</h1>
-      Date: {blog.created_at}
+      Date: {blog.createdAt}
       <hr />
       <div dangerouslySetInnerHTML={{__html: `${content}`}}></div>
     </div>
@@ -56,7 +56,7 @@ export const getStaticProps = async context => {
     `http://localhost:1337/restaurants/${id}`,
   );
   const blog = await res.json();
-console.log(blog)
+// console.log(blog)
   return {
     props : {
       blog: blog,
