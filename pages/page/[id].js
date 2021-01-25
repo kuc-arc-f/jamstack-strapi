@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import Layout from '../../components/layout'
 import TopHeadBox from '../../components/TopHeadBox'
+import PagingBox from '../../components/PagingBox'
 import IndexRow from '../IndexRow';
 import LibPagenate from '../../libs/LibPagenate'
 //
@@ -11,8 +12,8 @@ function Page(data) {
   var items = data.blogs
   var paginateDisp = data.display
   var page = data.page
-  var nextPage = parseInt(page) + parseInt(1)
-//console.log("display=", data.display , nextPage)  
+//  var nextPage = parseInt(page) + parseInt(1)
+//console.log("display=", data.display)  
   return (
     <Layout>
       <TopHeadBox />
@@ -33,17 +34,7 @@ function Page(data) {
                 )
               })}
               <hr /> 
-              { paginateDisp ? (
-              <div className="paginate_wrap">
-                <div className="btn-group" role="group" aria-label="Basic example">
-                  <Link href="/page/1"><a className="btn btn-lg btn-outline-primary">
-                    1st</a></Link>
-                    <Link href={`/page/${nextPage}`}><a className="btn btn-lg btn-outline-primary">
-                    > </a></Link>
-                </div>
-              </div>
-              ): 
-              "" }              
+              <PagingBox page={page} paginateDisp={paginateDisp} />            
             </div>
           </div>          
         </div>

@@ -5,6 +5,7 @@ import Layout from '../components/layout'
 import LibCommon from '../libs/LibCommon'
 import LibPagenate from '../libs/LibPagenate'
 import TopHeadBox from '../components/TopHeadBox'
+import PagingBox from '../components/PagingBox'
 import IndexRow from './IndexRow';
 //
 function Page(data) {
@@ -30,18 +31,8 @@ function Page(data) {
                         date={item.createdAt} />       
                 )
               })}
-              <hr />   
-              { paginateDisp ? (
-              <div className="paginate_wrap">
-                <div className="btn-group" role="group" aria-label="Basic example">
-                  <Link href="/page/1"><a className="btn btn-lg btn-outline-primary">
-                    1st</a></Link>
-                    <Link href="/page/2"><a className="btn btn-lg btn-outline-primary">
-                    > </a></Link>
-                </div>
-              </div>
-              ):"" 
-              }                       
+              <hr /> 
+              <PagingBox page="1" paginateDisp={paginateDisp} />  
             </div>
           </div>          
         </div>
