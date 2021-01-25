@@ -6,7 +6,7 @@
 
  date    : 2021/01/21
 
- update  : 2021/01/23
+ update  : 2021/01/25
 
 ***
 ### Summary
@@ -28,6 +28,13 @@ yarn dev
 
 yarn deploy
 
+***
+### API  collection-Type
+
+collection-Type :task
+
+field:
+  title :  text,  content :  text
 
 ***
 ### Blog :

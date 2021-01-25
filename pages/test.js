@@ -7,7 +7,7 @@ import TopHeadBox from '../components/TopHeadBox'
 import IndexRow from './IndexRow';
 //
 function Page(data) {
-console.log(data.blogs)
+//console.log(data.blogs)
   var items = data.blogs
   return (
     <Layout>
@@ -16,7 +16,7 @@ console.log(data.blogs)
         <ul>
         {items.map((item, index) => {
           return (<IndexRow key={index}
-                  id={item.id} name={item.name} />       
+                  id={item.id} title={item.title} />       
           )
         })}          
         </ul>
@@ -27,8 +27,9 @@ console.log(data.blogs)
 }
 export const getStaticProps = async context => {
 //console.log( process.env.API_KEY )
-  const res = await fetch(
-    `http://localhost:1337/restaurants`,
+//    `http://localhost:1337/restaurants`,
+const res = await fetch(
+    `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
   );
   const blogs = await res.json();
 //console.log(blogs)

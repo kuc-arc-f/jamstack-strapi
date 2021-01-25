@@ -1,4 +1,6 @@
 import React from 'react'
+//import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import Layout from '../components/layout'
 import LibCommon from '../libs/LibCommon'
@@ -7,8 +9,9 @@ import TopHeadBox from '../components/TopHeadBox'
 import IndexRow from './IndexRow';
 //
 function Page(data) {
-//console.log(data.blogs )
   var items = data.blogs
+  var paginateDisp = data.display
+//console.log("display=", data.display )
   return (
     <Layout>
       <TopHeadBox />
@@ -24,10 +27,22 @@ function Page(data) {
               {items.map((item, index) => {
 //                console.log(item.id ,item.createdAt )
                 return (<IndexRow key={index}
-                        id={item.id} name={item.name}
+                        id={item.id} title={item.title}
                         date={item.createdAt} />       
                 )
-              })}              
+              })}
+              <hr />   
+              { paginateDisp ? (
+              <div className="paginate_wrap">
+                <div className="btn-group" role="group" aria-label="Basic example">
+                  <Link href="/page/1"><a className="btn btn-lg btn-outline-primary">
+                    1st</a></Link>
+                    <Link href="/page/2"><a className="btn btn-lg btn-outline-primary">
+                    > </a></Link>
+                </div>
+              </div>
+              ):"" 
+              }                       
             </div>
           </div>          
         </div>
@@ -37,16 +52,19 @@ function Page(data) {
 }
 //
 export const getStaticProps = async context => {
-//console.log( process.env.API_KEY )
+// console.log( context )
     const res = await fetch(
-      `http://localhost:1337/restaurants`,
+      `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
     );
     const blogs = await res.json();
-//    console.log(blogs)
+    LibPagenate.init()
+    var display = LibPagenate.is_paging_display(blogs.length)
+//console.log(blogs.length)
     return {
       props : {
-        blogs: blogs,
+        blogs: blogs,display: display
       }
     };
-  }
+}
+
 export default Page

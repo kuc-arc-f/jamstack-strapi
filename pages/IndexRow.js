@@ -5,7 +5,7 @@ const IndexRow = props => (
     <div className="div_news_rows">
       <Link href={`/posts/${props.id}`} >
         <a>
-          <h3 className="ml-10"> {props.name}</h3>
+          <h3 className="ml-10"> {props.title}</h3>
         </a>
       </Link>        
     </div>

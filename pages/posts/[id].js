@@ -8,7 +8,7 @@ import Layout from '../../components/layout'
 //
 const BlogId = ({blog}) => {
 //console.log(blog)
-  var content = marked(blog.description)
+  var content = marked(blog.content)
 //  var content = ""
   return (
   <Layout>
@@ -19,10 +19,10 @@ const BlogId = ({blog}) => {
       <hr className="mt-2 mb-2" />
       <div className="show_head_wrap">
           <i className="fas fa-home"></i> >
-          {blog.name}
+          {blog.title}
       </div>
       <hr />            
-      <h1>{blog.name}</h1>
+      <h1>{blog.title}</h1>
       Date: {blog.createdAt}
       <hr />
       <div dangerouslySetInnerHTML={{__html: `${content}`}}></div>
@@ -44,7 +44,7 @@ const BlogId = ({blog}) => {
 };
 //
 export const getStaticPaths = async () => {
-  const res = await fetch('http://localhost:1337/restaurants' );
+  const res = await fetch('http://localhost:1337/tasks' );
   const repos = await res.json();
   const paths = repos.map(repo => `/posts/${repo.id}`); 
   return {paths, fallback: false};
@@ -53,7 +53,7 @@ export const getStaticProps = async context => {
   const id = context.params.id;
 // console.log(id)
   const res = await fetch(
-    `http://localhost:1337/restaurants/${id}`,
+    `http://localhost:1337/tasks/${id}`,
   );
   const blog = await res.json();
 // console.log(blog)
