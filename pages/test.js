@@ -26,10 +26,9 @@ function Page(data) {
     )
 }
 export const getStaticProps = async context => {
-//console.log( process.env.API_KEY )
-//    `http://localhost:1337/restaurants`,
-const res = await fetch(
-    `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
+//  `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
+  const res = await fetch(
+    `http://localhost:1337/ex-items?_sort=createdAt:DESC&_start=0&_limit=10`,
   );
   const blogs = await res.json();
 //console.log(blogs)

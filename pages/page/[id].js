@@ -55,6 +55,9 @@ function Page(data) {
 export const getStaticProps = async context => {
   const page = context.params.id;
 //console.log("page=", page)
+  const resCount = await fetch("http://localhost:1337/tasks/count");
+  const count = await resCount.json();
+//console.log("count=", count)
   LibPagenate.init()
   var pageInfo=LibPagenate.get_page_start(page)
   var url = "http://localhost:1337/tasks?_sort=createdAt:DESC"
@@ -62,8 +65,8 @@ export const getStaticProps = async context => {
 //  console.log(url)
   const res = await fetch(url);
   const blogs = await res.json();
-  var display = LibPagenate.is_paging_display(blogs.length)
-console.log("disp=" , display)
+  var display = LibPagenate.is_next_display(page, count)
+//console.log("disp=" , display)
   return {
     props : {
       blogs: blogs, display: display, page: page
@@ -75,15 +78,17 @@ export async function getStaticPaths() {
     `http://localhost:1337/tasks?_sort=createdAt:DESC`,
   );
   const blogs = await res.json(); 
-console.log( "len=", blogs.length ) 
+//console.log( "len=", blogs.length ) 
   LibPagenate.init()
   var pageMax =LibPagenate.get_max_page(blogs.length)
-console.log( "pageMax=", pageMax)
+//console.log( "pageMax=", pageMax)
   pageMax = Math.ceil(pageMax)
   var paths = []
   for(var i= 1 ; i<= pageMax; i++ ){
     var item = {
-      params : {id: String(i)} 
+      params : {
+        id: String(i)
+      } 
     }
     paths.push(item)
   }

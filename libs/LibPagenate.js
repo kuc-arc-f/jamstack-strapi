@@ -37,6 +37,15 @@ export default {
         }
         return ret;
     },
+    is_next_display(page, count){
+        var ret = 0
+        var maxNum = count / this.per_page;
+//console.log( "maxNum=" ,maxNum )
+        if(page < maxNum){
+            ret = 1
+        }
+        return ret
+    },
     get_page_items(data){
         var paginate_disp = this.is_paging_display(data.length)
         var page_item = {

@@ -1,5 +1,4 @@
 import React from 'react'
-//import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import Layout from '../components/layout'
@@ -53,18 +52,18 @@ function Page(data) {
 //
 export const getStaticProps = async context => {
 // console.log( context )
-    const res = await fetch(
-      `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
-    );
-    const blogs = await res.json();
-    LibPagenate.init()
-    var display = LibPagenate.is_paging_display(blogs.length)
-//console.log(blogs.length)
-    return {
-      props : {
-        blogs: blogs,display: display
-      }
-    };
+  const res = await fetch(
+    `http://localhost:1337/tasks?_sort=createdAt:DESC&_start=0&_limit=10`,
+  );
+  const blogs = await res.json();
+  LibPagenate.init()
+  var display = LibPagenate.is_paging_display(blogs.length)
+// console.log(blogs.length)
+  return {
+    props : {
+      blogs: blogs,display: display
+    }
+  };
 }
 
 export default Page
